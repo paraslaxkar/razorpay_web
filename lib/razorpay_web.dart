@@ -2,10 +2,7 @@ library razorpay_web;
 import 'dart:convert';
 import 'package:eventify/eventify.dart';
 import 'package:flutter/services.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:universal_platform/universal_platform.dart';
 
-/// Flutter plugin for Razorpay SDK
 class Razorpay {
   // Response codes from platform
   static const _CODE_PAYMENT_SUCCESS = 0;
@@ -49,11 +46,6 @@ class Razorpay {
       return;
     }
 
-    if (UniversalPlatform.isAndroid) {
-      PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      _channel.invokeMethod('setPackageName', packageInfo.packageName);
-    }
-
     var response = await _channel.invokeMethod('open', options);
     _handleResult(response);
   }
@@ -84,7 +76,7 @@ class Razorpay {
       default:
         eventName = 'error';
         payload =
-            PaymentFailureResponse(UNKNOWN_ERROR, 'An unknown error occurred.',"{}");
+            PaymentFailureResponse(UNKNOWN_ERROR, 'An unknown error occurred.',"{}",null);
     }
 
     _eventEmitter.emit(eventName, null, payload);
@@ -126,40 +118,37 @@ class Razorpay {
   }
 }
 
-/// Payment response classes
 class PaymentSuccessResponse {
-  /// Payment id
   String? paymentId;
-
-  /// Order id
   String? orderId;
-
-  /// Signature
   String? signature;
+  Map<dynamic, dynamic>? data;
 
-  PaymentSuccessResponse(this.paymentId, this.orderId, this.signature);
+  PaymentSuccessResponse(
+      this.paymentId, this.orderId, this.signature, this.data);
 
   static PaymentSuccessResponse fromMap(Map<dynamic, dynamic> map) {
     String? paymentId = map["razorpay_payment_id"];
     String? signature = map["razorpay_signature"];
     String? orderId = map["razorpay_order_id"];
-
-    return PaymentSuccessResponse(paymentId, orderId, signature);
+    Map<dynamic, dynamic> data = map;
+    return PaymentSuccessResponse(paymentId, orderId, signature, data);
   }
 }
 
-/// Payment response classes
 class PaymentFailureResponse {
   int? code;
   String? message;
   String? metadata;
-  PaymentFailureResponse(this.code, this.message,this.metadata);
+    Map<dynamic, dynamic>? error;
+  PaymentFailureResponse(this.code, this.message,this.metadata,this.error);
 
   static PaymentFailureResponse fromMap(Map<dynamic, dynamic> map) {
     var code = map["code"] as int?;
     var message = map["message"] as String?;
     var metadata =  (jsonEncode(map["metadata"]??{})??"") as String?;
-    return PaymentFailureResponse(code, message,metadata);
+        var responseBody = map["responseBody"] as Map<dynamic, dynamic>?;
+    return PaymentFailureResponse(code, message,metadata,responseBody);
   }
 }
 

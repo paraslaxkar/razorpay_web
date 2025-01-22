@@ -6,10 +6,9 @@ Flutter Razorpay Plugin
 </p>
 
 <p align="center">
-	<a href="https://pub.dev/packages/infinite_scroll_pagination" rel="noopener" target="_blank"><img src="https://img.shields.io/pub/v/infinite_scroll_pagination.svg" alt="Pub.dev Badge"></a>
+	<a href="https://pub.dev/packages/razorpay_web" rel="noopener" target="_blank"><img src="https://img.shields.io/pub/v/infinite_scroll_pagination.svg" alt="Pub.dev Badge"></a>
 	<a href="https://github.com/EdsonBueno/infinite_scroll_pagination/actions" rel="noopener" target="_blank"><img src="https://github.com/EdsonBueno/infinite_scroll_pagination/workflows/build/badge.svg" alt="GitHub Build Badge"></a>
 	<a href="https://codecov.io/gh/EdsonBueno/infinite_scroll_pagination" rel="noopener" target="_blank"><img src="https://codecov.io/gh/EdsonBueno/infinite_scroll_pagination/branch/master/graph/badge.svg?token=B0CT995PHU" alt="Code Coverage Badge"></a>
-	<a href="https://gitter.im/infinite_scroll_pagination/community" rel="noopener" target="_blank"><img src="https://badges.gitter.im/infinite_scroll_pagination/community.svg" alt="Gitter Badge"></a>
 	<a href="https://github.com/tenhobi/effective_dart" rel="noopener" target="_blank"><img src="https://img.shields.io/badge/style-effective_dart-40c4ff.svg" alt="Effective Dart Badge"></a>
 	<a href="https://opensource.org/licenses/MIT" rel="noopener" target="_blank"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="MIT License Badge"></a>
 	<a href="https://github.com/EdsonBueno/infinite_scroll_pagination" rel="noopener" target="_blank"><img src="https://img.shields.io/badge/platform-flutter-ff69b4.svg" alt="Flutter Platform Badge"></a>
@@ -20,6 +19,9 @@ Flutter Razorpay Plugin
 ![image](https://user-images.githubusercontent.com/14369357/48184454-17c1bc80-e358-11e8-8821-269a30935a68.png)
 
 A flutter plugin for razorpay integration for Web , Android and iOS.
+
+## Live Demo
+Try out the live web demo at: [https://razorpayy.web.app/](https://razorpayy.web.app/)
 
 
 <p align="center">
@@ -50,7 +52,10 @@ The following documentation is only focused on the wrapper around our native And
 
 **iOS**: [https://razorpay.com/docs/ios/](https://razorpay.com/docs/ios/)
 
-**Web**: No Setup Required, The package supports web out of the box.
+**Web**: Add the following script to your `web/index.html` file in the head tag:
+```html
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+```
 
 To know more about Razorpay payment flow and steps involved, read up here: [https://razorpay.com/docs/](https://razorpay.com/docs/)
 
